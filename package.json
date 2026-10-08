@@ -1,0 +1,21 @@
+{
+  "name": "ge-ledger",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace client\" \"npm run dev --workspace server\"",
+    "build": "npm run build --workspace client && npm run build --workspace server",
+    "test": "npm run test --workspace client && npm run test --workspace server",
+    "lint": "npm run lint --workspace client && npm run lint --workspace server",
+    "db:migrate": "npm run db:migrate --workspace server",
+    "db:seed": "npm run db:seed --workspace server",
+    "test:e2e": "echo \"E2E not configured yet in Phase 1\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model WatchlistItem {
+  id        String   @id @default(cuid())
+  itemId    Int      @unique
+  targetBuy Float?
+  targetSell Float?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PriceSnapshot {
+  id         String   @id @default(cuid())
+  itemId     Int
+  high       Float?
+  low        Float?
+  highTime   DateTime?
+  lowTime    DateTime?
+  capturedAt DateTime @default(now())
+
+  @@index([itemId, capturedAt])
+}
+
+model PortfolioPosition {
+  id              String   @id @default(cuid())
+  itemId          Int
+  quantity        Int
+  averageBuyPrice Float?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AppSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+}
